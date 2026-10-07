@@ -6,14 +6,15 @@ import pygame
 
 class Player(CircleShape):
 
-    def __init__(self, x, y) -> "Player":
+    def __init__(self, x, y) -> None:
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
 
     # in the Player class
     def triangle(self) -> list[pygame.Vector2]:
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
-        right = pygame.Vector2(0, 1).rotate(self.rotation + 90) * self.radius / 1.5
+        right = pygame.Vector2(0, 1).rotate(
+            self.rotation + 90) * self.radius / 1.5
         a = self.position + forward * self.radius
         b = self.position - forward * self.radius - right
         c = self.position - forward * self.radius + right
@@ -38,7 +39,7 @@ class Player(CircleShape):
             self.move(dt)
 
     def move(self, dt: float) -> None:
-        unit_v = pygame.Vector2(0, 1).rotate(self.rotation)
+        unit_v = pygame.Vector2(0, 1)
         rotated_vec = unit_v.rotate(self.rotation)
         rotated_vec_with_speed = rotated_vec * PLAYER_SPEED * dt
         self.position += rotated_vec_with_speed
